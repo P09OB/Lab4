@@ -59,10 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 num3 = numero3.getText().toString();
                 num4 = numero4.getText().toString();
 
-
-                Intent i = new Intent(this, Ping_Activity.class);
-                startActivity(i);
-
+                if(num1.equals("192") && num2.equals("168")&& num3.equals("0")) {
+                    Intent i = new Intent(this, Ping_Activity.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(this,"Siga el formato",Toast.LENGTH_LONG).show();
+                }
 
                 break;
 
@@ -79,7 +81,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences preferences = getSharedPreferences("dato",MODE_PRIVATE);
         preferences.edit().putString("numero",num4).apply();
 
-        preferences.edit().putString("numero1",num4).apply();
+        SharedPreferences preferencesnum2 = getSharedPreferences("dato2",MODE_PRIVATE);
+        preferences.edit().putString("numero2",num2).apply();
+
+        SharedPreferences preferencesnum3 = getSharedPreferences("dato3",MODE_PRIVATE);
+        preferences.edit().putString("numero3",num3).apply();
+
+        SharedPreferences preferencesnum1 = getSharedPreferences("dato1",MODE_PRIVATE);
+        preferences.edit().putString("numero1",num1).apply();
+
 
     }
 

@@ -47,28 +47,31 @@ public class Host_Activity extends AppCompatActivity implements View.OnClickList
                 ()-> {
 
                     while (comenzar) {
-                        try {
-                            Thread.sleep(500);
 
-                            for (int i = 0; i < 255; i++) {
+
+                            for (int i = 1; i < 255; i++) {
 
                                 try {
                                     InetAddress ine = InetAddress.getByName("192.186.0." + i);
                                     String ipLocal = ine.getHostAddress();
-                                    boolean conectado = ine.isReachable(1000);
+                                    boolean conectado = ine.isReachable(500);
+
+                                    String verificando = ipLocal + conectado + "";
+                                    Log.e("prueba", verificando+"");
 
                                     if (conectado == true) {
-
                                         Log.e("prueba", "192.186.0." + i);
-                                        host.add(ipLocal + " " + conectado);
-                                        String cadena = host.get(0).toString();
+
+                                        host.add(ipLocal + "");
 
                                         runOnUiThread(
                                                 () -> {
-                                                    hostText.setText(host + "\n");
+                                                    hostText.append(ipLocal + "\n");
                                                 }
                                         );
                                     }
+
+
                                 } catch (UnknownHostException e) {
                                     e.printStackTrace();
                                 } catch (IOException e) {
@@ -76,9 +79,7 @@ public class Host_Activity extends AppCompatActivity implements View.OnClickList
                                 }
                             }
 
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+
                     }
                 }
         ).start();
@@ -90,9 +91,10 @@ public class Host_Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-
+        comenzar = false ;
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        finish();
 
 
 
